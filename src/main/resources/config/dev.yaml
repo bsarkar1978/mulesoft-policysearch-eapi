@@ -1,0 +1,16 @@
+### API ID ### Create API Configuration in API Manager for DEV Env and update the id. 
+api:
+  id: "18090863"
+  path: "/api/*"
+  
+http:
+  listener:
+    host: "0.0.0.0"
+    port: "8081"
+    responseTimeOut: "180000"
+  
+ccservices-mutualofenumclaw-api:
+  url:
+    search: "http://ccservices-dev.mutualofenumclaw.net/api/v1/search"
+    interimRetrieve: "http://ccservices-dev.mutualofenumclaw.net/api/v1/interim_retrieve"
+    pointRetrieve: "http://ccservices-dev.mutualofenumclaw.net/api/v1/point_retrieve"

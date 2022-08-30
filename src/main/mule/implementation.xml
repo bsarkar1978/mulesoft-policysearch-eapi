@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="implementation_policy_search" doc:id="c8458e75-f257-40ee-b398-d7530d8ec221" >
+		<logger level="INFO" doc:name="Start" doc:id="6f3645c1-f550-43bb-a22f-6dc3be3ebeb0" message="Start of policy search http request"/>
+		<http:request method="GET" doc:name="Policy Search HTTP Request" doc:id="b4301596-3552-4d70-bfd9-4e94a48f300b" url="${ccservices-mutualofenumclaw-api.url.search}">
+			<http:query-params ><![CDATA[#[output application/java
+---
+attributes.queryParams]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="End" doc:id="a7d50cf4-3534-4bf6-b52d-867c3e1f47fe" message="End of policy search http request"/>
+	</sub-flow>
+	<sub-flow name="implementation_policy_interim_retrieve" doc:id="36716898-0da8-4ba6-a9d3-727e835f1aba" >
+		<logger level="INFO" doc:name="Start" doc:id="a3e74e09-8c34-49f0-ab64-2cc7dc51b01f" message="Start of policy interim retrieve http request"/>
+		<http:request method="GET" doc:name="Policy Interim Retrieve HTTP Request" doc:id="a202560a-2888-486a-ae66-d31f21959b67" url="${ccservices-mutualofenumclaw-api.url.interimRetrieve}">
+			<http:query-params ><![CDATA[#[output application/java
+---
+attributes.queryParams]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="End" doc:id="92079c19-ca56-464f-983d-d3273a000f29" message="End of policy interim retrieve http request"/>
+	</sub-flow>
+	<sub-flow name="implementation_policy_point_retrieve" doc:id="f054b20a-0891-44d0-9f09-f31a9249ff82" >
+		<logger level="INFO" doc:name="Start" doc:id="cb9eb0b9-a7a4-4eb1-833a-c7291f83393b" message="Start of policy point retrieve http request"/>
+		<http:request method="GET" doc:name="Policy Point Retrieve HTTP Request" doc:id="74c3c567-78f3-4e01-87ab-efec22de577f" url="${ccservices-mutualofenumclaw-api.url.pointRetrieve}">
+			<http:query-params ><![CDATA[#[output application/java
+---
+attributes.queryParams]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="End" doc:id="09e4b4c6-76b1-4e08-8e15-9648f346dac1" message="End of policy point retrieve http request"/>
+	</sub-flow>
+	<sub-flow name="implementation_healthcheck" doc:id="b377187e-9e0e-430d-bcb8-96d81a994c15" >
+		<ee:transform doc:name="implementation_healthcheck" doc:id="242d27a7-c9d8-4e5f-82f0-07846ae0559e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	"status": "ok",
+	"environment": p('mule.env') as String,
+	"now": now()
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

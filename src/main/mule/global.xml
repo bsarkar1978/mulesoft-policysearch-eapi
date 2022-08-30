@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="6e401c41-720a-4d08-9e1b-53cd383c4207" file="config/common.yaml" doc:description="Configuration for common application properties"/>
+	<global-property doc:name="Global Property" doc:id="ae886f7a-4e6a-4ca2-8159-4bf8009cbde1" name="mule.env" value="${mule.env}" />
+	<configuration-properties doc:name="Configuration properties" doc:id="ab04c71a-49d2-4137-a8e6-702b3b6ed091" doc:description="Configuration to load environment specific properties" file="config/${mule.env}.yaml" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="2d213cb0-b2bb-4c00-9cb2-6e11408d63ca" flowRef="policysearch-eapi-main" doc:description="Api AutoDiscovery config"/>
+</mule>
