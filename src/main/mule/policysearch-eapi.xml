@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
     <http:listener-config name="policysearch-eapi-httpListenerConfig">
         <http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
     </http:listener-config>
-    <apikit:config name="policysearch-eapi-config" api="resource::0072e005-3972-479c-9ff1-40535876d0fe:policysearch-eapi:1.0.4:raml:zip:policysearch-eapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="policysearch-eapi-config" api="resource::0072e005-3972-479c-9ff1-40535876d0fe:policysearch-eapi:1.0.7:raml:zip:policysearch-eapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="policysearch-eapi-main">
         <http:listener config-ref="policysearch-eapi-httpListenerConfig" path="${api.path}">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -124,15 +124,15 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\health:policysearch-eapi-config">
-		<flow-ref doc:name="implementation_healthcheck" doc:id="813cb7e4-0d5c-440d-b51e-b14d2c2893d3" name="implementation_healthcheck"/>
+        <flow-ref doc:name="implementation_healthcheck" doc:id="813cb7e4-0d5c-440d-b51e-b14d2c2893d3" name="implementation_healthcheck" />
     </flow>
-    <flow name="get:\policy\interimRetrieve:policysearch-eapi-config">
-		<flow-ref doc:name="implementation_policy_interim_retrieve" doc:id="96435169-0819-4fc2-a71a-d98d24215889" name="implementation_policy_interim_retrieve"/>
+    <flow name="get:\claimcenter\policy\interimRetrieve:policysearch-eapi-config">
+		<flow-ref doc:name="implementation_policy_interim_retrieve" doc:id="96435169-0819-4fc2-a71a-d98d24215889" name="implementation_policy_interim_retrieve" />
     </flow>
-    <flow name="get:\policy\pointRetrieve:policysearch-eapi-config">
-		<flow-ref doc:name="implementation_policy_point_retrieve" doc:id="5592757c-478f-4593-b7ac-4c7b9849a202" name="implementation_policy_point_retrieve"/>
+    <flow name="get:\claimcenter\policy\pointRetrieve:policysearch-eapi-config">
+		<flow-ref doc:name="implementation_policy_point_retrieve" doc:id="5592757c-478f-4593-b7ac-4c7b9849a202" name="implementation_policy_point_retrieve" />
     </flow>
-    <flow name="get:\policy\search:policysearch-eapi-config">
-		<flow-ref doc:name="implementation_policy_search" doc:id="96863e44-0065-4fd3-814a-8a8dea0a670a" name="implementation_policy_search"/>
+    <flow name="get:\claimcenter\policy\search:policysearch-eapi-config">
+		<flow-ref doc:name="implementation_policy_search" doc:id="96863e44-0065-4fd3-814a-8a8dea0a670a" name="implementation_policy_search" />
     </flow>
 </mule>
